@@ -1,0 +1,38 @@
+body {
+  background-color: #1e1e1e;
+  color: #bbb;
+  width: 150px;
+}
+
+header {
+  background-color: #b52a07;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  padding: 1px;
+  font-size: 9px;
+}
+
+p {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+input[type="checkbox"] {
+  accent-color: #d68526;
+}
+
+label {
+  font-size: 10px;
+  margin-bottom: 2px;
+  position: relative;
+  top: -3px;
+}
+
+button {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #24282a;
+  color: #d68527;
+  border: solid 1px #2f3335;
+}
