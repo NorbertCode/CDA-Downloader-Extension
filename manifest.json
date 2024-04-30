@@ -5,5 +5,11 @@
   "version": "1.0",
   "action": {
     "default_popup": "index.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.cda.pl/video/*"],
+      "js": ["siteHandler.js"]
+    }
+  ]
 }
