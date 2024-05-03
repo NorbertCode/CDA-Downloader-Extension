@@ -1,26 +1,40 @@
-var link = "";
 var add_button = true;
 var instant_download = true;
 
-function refreshLink() {
-  link = document.querySelector(".pb-video-player").getAttribute("src");
+function getLink() {
+  return document.querySelector(".pb-video-player").getAttribute("src");
 }
 
 function addButton() {
-  let newButton = document.createElement("div");
-  newButton.classList.add("bttn", "bttn-light", "bttn-light-block");
-  newButton.style.marginBottom = "4px";
-  newButton.style.backgroundColor = "#d68526";
-  linkTag = "<a style=\"color: #24282a;\" href=\"" + link + "\" target=\"_blank\" ";
-  if (instant_download) // this currently does not work, because of same-origin policy
-    linkTag += "download";
-  linkTag += ">Download</a>";
-  newButton.innerHTML = linkTag;
+  var button = document.createElement("div");
+  button.classList.add("bttn", "bttn-light", "bttn-light-block");
+  button.style.marginBottom = "4px";
+  button.style.backgroundColor = "#d68526";
+  button.innerHTML = "Download";
+
+  button.onclick = function () { download(); };
 
   let boxButtons = document.querySelector(".box-buttons");
-  boxButtons.insertBefore(newButton, boxButtons.childNodes[4])
+  boxButtons.insertBefore(button, boxButtons.childNodes[4])
 }
 
-refreshLink();
+function download() {
+  let temp = document.createElement("a");
+  temp.href = getLink();
+  temp.target = "_blank";
+  temp.download = "";
+  temp.click();
+  delete temp;
+}
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message === "Init") {
+    sendResponse({ message: getLink() });
+  }
+  else if (request.message === "Download") {
+    download();
+  }
+});
+
 if (add_button)
   addButton();
