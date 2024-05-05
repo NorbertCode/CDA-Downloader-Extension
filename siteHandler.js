@@ -6,28 +6,29 @@ function getLink() {
 }
 
 function addButton() {
-  var button = document.createElement("div");
+  let button = document.createElement("div");
   button.classList.add("bttn", "bttn-light", "bttn-light-block");
   button.style.marginBottom = "4px";
   button.style.backgroundColor = "#d68526";
   button.innerHTML = "Download";
 
-  button.onclick = function () { download(); };
+  button.onclick = function() { download(); };
 
+  // Add it near the watch later, share, etc. buttons
   let boxButtons = document.querySelector(".box-buttons");
   boxButtons.insertBefore(button, boxButtons.childNodes[4])
 }
 
+// For now this just opens the video in another tab, allowing the user to download it
 function download() {
   let temp = document.createElement("a");
   temp.href = getLink();
   temp.target = "_blank";
-  temp.download = "";
   temp.click();
   delete temp;
 }
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.message === "Init") {
     sendResponse({ message: getLink() });
   }
@@ -36,5 +37,4 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 });
 
-if (add_button)
-  addButton();
+addButton();
