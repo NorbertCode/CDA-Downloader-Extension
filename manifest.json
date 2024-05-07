@@ -11,5 +11,12 @@
       "matches": ["https://*.cda.pl/video/*"],
       "js": ["siteHandler.js"]
     }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "downloads"
   ]
 }
