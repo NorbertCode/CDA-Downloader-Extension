@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "CDA Downloader",
   "description": "Download videos from cda.pl",
-  "version": "0.1",
+  "version": "0.2",
   "action": {
     "default_popup": "index.html"
   },
