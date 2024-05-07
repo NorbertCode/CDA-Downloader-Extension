@@ -12,28 +12,20 @@ function addButton() {
   button.style.backgroundColor = "#d68526";
   button.innerHTML = "Download";
 
-  button.onclick = function() { download(); };
+  button.onclick = function() {
+    // Using a background script is the only way to instantly start a download,
+    // since cda.pl's .mp4s are held on a different origin
+    chrome.runtime.sendMessage({ message: "Download", link: getLink() });
+  };
 
   // Add it near the watch later, share, etc. buttons
   let boxButtons = document.querySelector(".box-buttons");
   boxButtons.insertBefore(button, boxButtons.childNodes[4])
 }
 
-// For now this just opens the video in another tab, allowing the user to download it
-function download() {
-  let temp = document.createElement("a");
-  temp.href = getLink();
-  temp.target = "_blank";
-  temp.click();
-  delete temp;
-}
-
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.message === "Init") {
     sendResponse({ message: getLink() });
-  }
-  else if (request.message === "Download") {
-    download();
   }
 });
 
