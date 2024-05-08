@@ -15,6 +15,27 @@ function createDownloadButton(link) {
   document.querySelector("main").append(button);
 }
 
+// -- On popup loaded --
+
+function loadOptions() {
+  let addButton = document.querySelector("#add_button");
+  let instantDownload = document.querySelector("#instant_download");
+
+  chrome.storage.local.get(["afsk"]).then((result) => {
+    if (result.afsk == "true") {
+      console.log("kutas");
+      chrome.storage.local.get(["chuj"]).then((result) => { addButton.checked = result.chuj; });
+    }
+    else {
+      console.log("chuj");
+      chrome.storage.local.set({ "afsk": "true" });
+      chrome.storage.local.set({ "chuj": addButton.value });
+    }
+  });
+}
+
+loadOptions();
+
 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
   let activeTab = tabs[0];
 
