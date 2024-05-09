@@ -21,15 +21,16 @@ function loadOptions() {
   let addButton = document.querySelector("#add_button");
   let instantDownload = document.querySelector("#instant_download");
 
-  chrome.storage.local.get(["afsk"]).then((result) => {
-    if (result.afsk == "true") {
-      console.log("kutas");
-      chrome.storage.local.get(["chuj"]).then((result) => { addButton.checked = result.chuj; });
+  chrome.storage.local.get(["dataExists"]).then((result) => {
+    if (result.dataExists == "true") {
+      chrome.storage.local.get(["add_button"]).then((result) => { addButton.checked = (result.add_button === true); });
+      chrome.storage.local.get(["instant_download"]).then((result) => { instantDownload.checked = (result.instant_download === true); });
     }
     else {
-      console.log("chuj");
-      chrome.storage.local.set({ "afsk": "true" });
-      chrome.storage.local.set({ "chuj": addButton.value });
+      chrome.storage.local.set({ "dataExists": "true" });
+
+      chrome.storage.local.set({ "add_button": addButton.checked });
+      chrome.storage.local.set({ "instant_download": instantDownload.checked });
     }
   });
 }
