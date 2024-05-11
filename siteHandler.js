@@ -6,21 +6,26 @@ function getLink() {
 }
 
 function addButton() {
-  let button = document.createElement("div");
-  button.classList.add("bttn", "bttn-light", "bttn-light-block");
-  button.style.marginBottom = "4px";
-  button.style.backgroundColor = "#d68526";
-  button.innerHTML = "Download";
+  chrome.storage.local.get(["add_button"]).then((result) => {
+    if (result.add_button != "true")
+      return;
 
-  button.onclick = function() {
-    // Using a background script is the only way to instantly start a download,
-    // since cda.pl's .mp4s are held on a different origin
-    chrome.runtime.sendMessage({ message: "Download", link: getLink() });
-  };
+    let button = document.createElement("div");
+    button.classList.add("bttn", "bttn-light", "bttn-light-block");
+    button.style.marginBottom = "4px";
+    button.style.backgroundColor = "#d68526";
+    button.innerHTML = "Download";
 
-  // Add it near the watch later, share, etc. buttons
-  let boxButtons = document.querySelector(".box-buttons");
-  boxButtons.insertBefore(button, boxButtons.childNodes[4])
+    button.onclick = function() {
+      // Using a background script is the only way to instantly start a download,
+      // since cda.pl's .mp4s are held on a different origin
+      chrome.runtime.sendMessage({ message: "Download", link: getLink() });
+    };
+
+    // Add it near the watch later, share, etc. buttons
+    let boxButtons = document.querySelector(".box-buttons");
+    boxButtons.insertBefore(button, boxButtons.childNodes[4])
+  });
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
