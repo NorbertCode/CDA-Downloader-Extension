@@ -35,24 +35,22 @@ function loadOptions() {
   });
 }
 
-function changeValue(element) {
-  id = element.id;
-  checked = element.checked.toString();
-  chrome.storage.local.set({ [id]: checked }).then(() => { chrome.storage.local.get(id).then((result) => { console.log(id, result); }); });
+function changeValue(key, value) {
+  chrome.storage.local.set({ [key]: value });
 }
 
+// Add events to all inputs
 function setInputEvents() {
-  let elements = document.querySelectorAll('input[type="checkbox"]');
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].addEventListener("click", () => { changeValue(elements[i]); });
+  let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  for (let i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].addEventListener("click", () => { changeValue(checkboxes[i].id, checkboxes[i].checked.toString()); });
   }
 }
 
+// -- Start-up --
+
 setInputEvents();
 loadOptions();
-
-chrome.storage.local.get("dataExists").then((result) => { console.log(result); });
-chrome.storage.local.get("add_button").then((result) => { console.log(result); });
 
 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
   let activeTab = tabs[0];
