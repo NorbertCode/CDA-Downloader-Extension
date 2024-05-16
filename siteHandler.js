@@ -19,7 +19,8 @@ function addButton() {
     button.onclick = function() {
       // Using a background script is the only way to instantly start a download,
       // since cda.pl's .mp4s are held on a different origin
-      chrome.runtime.sendMessage({ message: "Download", link: getLink() });
+      let videoName = document.querySelector(".title-name").childNodes[0].childNodes[0].innerText;
+      chrome.runtime.sendMessage({ message: "Download", link: getLink(), videoName: videoName });
     };
 
     // Add it near the watch later, share, etc. buttons
@@ -30,7 +31,8 @@ function addButton() {
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.message === "Init") {
-    sendResponse({ message: getLink() });
+    let videoName = document.querySelector(".title-name").childNodes[0].childNodes[0].innerText;
+    sendResponse({ link: getLink(), videoName: videoName });
   }
 });
 
