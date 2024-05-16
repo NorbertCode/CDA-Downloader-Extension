@@ -33,6 +33,13 @@ button {
   margin-top: 10px;
   width: 100%;
   background-color: #24282a;
-  color: #d68527;
+  color: #d68526;
+  border: solid 1px #2f3335;
+}
+
+select {
+  margin: 5px 0 0 5px;
+  background-color: #24282a;
+  color: #d68526;
   border: solid 1px #2f3335;
 }
