@@ -3,7 +3,7 @@ This is an extension for Chrome, which simplifies downloading videos from cda.pl
 
 Just press the "Download" button it adds to the page or in the extension window and you're good to go!
 
-<b>Currently support hasn't been tested on any browser other than Google Chrome.</b>
+Works on Google Chrome and Microsoft Edge, so it should work on most Chromium-based browsers.
 
 # Installation
 1. Go to Settings -> Extensions
