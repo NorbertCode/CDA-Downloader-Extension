@@ -6,9 +6,13 @@ Just press the "Download" button it adds to the page or in the extension window 
 Works on Google Chrome and Microsoft Edge, so it should work on most Chromium-based browsers.
 
 # Installation
-1. Go to Settings -> Extensions
-2. Enable Developer Mode
-3. Either drag and drop .crx file or press "Load unpacked" and select the source files
+1. Download the zipped .crx file from <a href="https://github.com/NorbertCode/CDA-Downloader-Extension/releases">Releases</a>
+2. Extract it, so you have just a .crx file
+3. Go to Settings -> Extensions
+4. Enable Developer Mode
+5. Drag and drop the .crx file onto your browser window
+
+If you want an easily modifiable version you can also download the source code and unzip it. Then go to your browser's extension settings, select "Load unpacked" and choose the newly extracted folder.
 
 # Usage
 <img align="right" src="https://github.com/NorbertCode/CDA-Downloader-Extension/assets/54719382/ca2bd423-6c1c-42e3-88b2-7a86573122cf">
